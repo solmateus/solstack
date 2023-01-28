@@ -12,7 +12,6 @@ impl State<GameData> for DummyState {
         data: &mut GameData,
     ) -> solstack::trans::Trans<GameData> {
         data.value += 1;
-        println!("Tick Popping DummyState {}", data.value);
         Trans::Pop
     }
 }
@@ -21,22 +20,18 @@ struct GameState;
 impl State<GameData> for GameState {
     fn on_start(&mut self, data: &mut GameData) {
         data.value += 1;
-        println!("Start {}", data.value);
     }
 
     fn on_stop(&mut self, data: &mut GameData) {
         data.value += 1;
-        println!("Stop {}", data.value);
     }
 
     fn on_pause(&mut self, data: &mut GameData) {
         data.value += 1;
-        println!("Pause {}", data.value);
     }
 
     fn on_resume(&mut self, data: &mut GameData) {
         data.value += 1;
-        println!("Resume {}", data.value);
     }
 
     fn on_tick(
@@ -45,12 +40,10 @@ impl State<GameData> for GameState {
     ) -> solstack::trans::Trans<GameData> {
         if data.popped_dummystate {
             data.value += 1;
-            println!("Tick Quitting {}", data.value);
             Trans::Quit
         } else {
             data.value += 1;
             data.popped_dummystate = true;
-            println!("Tick Pushing DumbState {}", data.value);
             Trans::Push(Box::new(DummyState))
         }
     }

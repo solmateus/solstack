@@ -106,7 +106,7 @@ macro_rules! trans_push {
 pub use trans_push;
 
 /// Alternative to [`Trans::Pop`](crate::trans::Trans::Pop).
-/// `Use trans_pop!()`
+/// Use `trans_pop!()`
 #[allow(clippy::crate_in_macro_def)]
 #[macro_export]
 macro_rules! trans_pop {
