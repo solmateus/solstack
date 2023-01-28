@@ -62,7 +62,7 @@ fn callback_counting() {
     let mut data = GameData { value: 0, popped_dummystate: false };
     let mut stack = Stack::<GameData>::new();
 
-    stack.push(Box::new(GameState), &mut data);
+    stack.push(&mut data, Box::new(GameState));
     while stack.is_running() {
         stack.tick(&mut data);
     }
