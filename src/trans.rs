@@ -7,20 +7,28 @@ use crate::state::State;
 /// - D: Data available to all [`State`](crate::state::State)s to perform actions to.
 pub enum Trans<D> {
 
-    /// Pushes a new [`State`](crate::state::State) above the current one.
-    /// Effectively pauses the current [`State`](crate::state::State) until everything above it is
+    /// Pushes a new state above the current one.
+    /// Effectively pauses the current state until everything above it is
     /// popped.
     Push(Box<dyn State<D>>),
 
-    /// Pops the current [`State`](crate::state::State) from the stack.
+    /// Pops the current state from the stack.
     Pop,
 
+    /// Pops and pushes a new state.
+    /// Effectively replaces the current state with a new one.
+    Replace(Box<dyn State<D>>),
+
+    /// Pops every state from the stack and pushes a new one.
+    /// Effectively isolates it as the only state on the stack.
+    Isolate(Box<dyn State<D>>),
+    
     /// Pops everything from the stack.
     /// Effectively ends the state stack machine.
     Quit,
 
     /// Does nothing to the stack.
-    /// Effectively keeps the current [`State`](crate::state::State).
+    /// Effectively keeps the current state and the stack the way it is.
     None,
 }
 

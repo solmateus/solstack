@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Empty
+
+## [0.2.0]
+
 ## Added
 
 - `Trans`
@@ -37,3 +41,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `guessing_game`
 - Tests
   - `callback_counting`
+  
