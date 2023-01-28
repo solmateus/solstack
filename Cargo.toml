@@ -1,0 +1,23 @@
+[package]
+name = "solstack"
+version = "0.1.0"
+description = "Enables management of your app's or game's control flow through a simple state stack machine."
+authors = ["solmateus <solmateusbraga@gmail.com>"]
+edition = "2021"
+keywords = ["game", "ecs", "state", "stack", "machine"]
+license = "MIT"
+categories = ["game-engines"]
+readme = "README.md"
+repository = "https://github.com/solmateus/solstack"
+documentation = "https://docs.rs/solstack"
+homepage = "https://solmateus.gitbook.io/solstack/"
+include = ["src/", "LICENSE-*", "README.md", "CHANGELOG.md"]
+
+[dependencies]
+
+[dev-dependencies]
+rand = "0.8.5"
+
+[[example]]
+name = "guessing_game"
+
