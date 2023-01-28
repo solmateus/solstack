@@ -20,4 +20,5 @@ rand = "0.8.5"
 
 [[example]]
 name = "guessing_game"
+path = "examples/guessing_game.rs"
 
