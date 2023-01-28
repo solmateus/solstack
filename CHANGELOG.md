@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   replacement.
   - `Isolate`: quits and pushes a new state, effectively isolating it as the 
   only one on the stack.
+  - Macros and functions on `Stack` for the new transitions.
 
 ## [0.1.0] - 2023-01-27
 
