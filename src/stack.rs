@@ -1,5 +1,5 @@
 use crate::trans::Trans;
-use crate::state::State;
+use crate::state::BoxState;
 
 /// Handles the control flow of a stack of [`State`](crate::state::States).
 /// Essentialy the `State Stack Machine`.
@@ -10,7 +10,7 @@ use crate::state::State;
 #[derive(Default)]
 pub struct Stack<D> {
 
-    stack: Vec<Box<dyn State<D>>>,
+    stack: Vec<BoxState<D>>,
 }
 
 // Constructors
@@ -27,6 +27,17 @@ impl <D> Stack<D> {
     /// Checks if there is at least one state on the stack.
     #[must_use]
     pub fn is_running(&self) -> bool { !self.stack.is_empty() }
+
+    /// Get the length of the stack.
+    #[must_use]
+    pub fn len(&self) -> usize {
+        self.stack.len()
+    }
+
+    #[must_use]
+    pub fn is_empty(&self) -> bool {
+        self.stack.is_empty()
+    }
 }
 
 // Pure transitions.
@@ -35,7 +46,7 @@ impl <D> Stack<D> {
     /// Pushes a new state above the current one.
     /// Effectively pauses the current state until everything above it is
     /// popped.
-    pub fn push(&mut self, data: &mut D, mut state: Box<dyn State<D>>) {
+    pub fn push(&mut self, data: &mut D, mut state: BoxState<D>) {
         // Run current `State`'s `.on_pause()`.
         if let Some(curr_state) = self.stack.last_mut() {
             curr_state.on_pause(data);
@@ -75,14 +86,14 @@ impl <D> Stack<D> {
 impl <D> Stack<D> {
     /// Pops and pushes a new state.
     /// Effectively replaces the current state with a new one.
-    pub fn replace(&mut self, data: &mut D, state: Box<dyn State<D>>) {
+    pub fn replace(&mut self, data: &mut D, state: BoxState<D>) {
         self.pop(data);
         self.push(data, state);
     }    
 
     /// Pops every state from the stack and pushes a new one.
     /// Effectively isolates it as the only state on the stack.
-    pub fn isolate(&mut self, data: &mut D, state: Box<dyn State<D>>) {
+    pub fn isolate(&mut self, data: &mut D, state: BoxState<D>) {
         self.quit(data);
         self.push(data, state);
     }    

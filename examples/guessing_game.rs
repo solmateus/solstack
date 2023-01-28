@@ -12,7 +12,7 @@ fn main() {
         stack_tick!(stack, data);
     }
 
-    println!("");
+    println!();
     println!("> Bye, bye; tchau, tchau!");
 }
 
@@ -37,7 +37,7 @@ struct SGame;
 
 impl State<GameData> for SMenu {
     fn on_tick(&mut self, _data: &mut GameData) -> Trans<GameData> {
-        println!("");
+        println!();
         println!("> Guessing Game");
         println!("> (p) play");
         println!("> (q) quit");
@@ -48,7 +48,7 @@ impl State<GameData> for SMenu {
             "p" => trans_push!(SGame),
             "q" => trans_quit!(),
             _ => {
-                println!("");
+                println!();
                 println!("> Error parsing input :^(");
                 println!("> (p) play");
                 println!("> (q) quit");
@@ -60,14 +60,14 @@ impl State<GameData> for SMenu {
 
 impl State<GameData> for SGame {
     fn on_start(&mut self, data: &mut GameData) {
-        println!("");
+        println!();
         println!("> A random number (ranged 1..=100) was generated.");
         println!("> Guess it! You'll have tips.");
         let mut rng = thread_rng();
         data.secret = rng.gen_range(1..=100);
     }
     fn on_tick(&mut self, data: &mut GameData) -> Trans<GameData> {
-        println!("");
+        println!();
         println!("> Guess:");
 
         let unparsed_guess = input();
@@ -80,7 +80,7 @@ impl State<GameData> for SGame {
             Ok(guess) => match guess.cmp(&data.secret) {
                 std::cmp::Ordering::Less => {
                     data.tries += 1;
-                    println!("");
+                    println!();
                     println!("> You guessed low!");
                     println!("> Try again!");
                     println!("> Guesses: {}.", data.tries);
@@ -88,14 +88,14 @@ impl State<GameData> for SGame {
                 }
                 std::cmp::Ordering::Equal => {
                     data.tries += 1;
-                    println!("");
+                    println!();
                     println!("> YOU DIT IT!");
                     println!("> It took you {} tries.", data.tries);
                     trans_pop!()
                 }
                 std::cmp::Ordering::Greater => {
                     data.tries += 1;
-                    println!("");
+                    println!();
                     println!("> You guessed high!");
                     println!("> Try again!");
                     println!("> Guesses: {}.", data.tries);
@@ -103,7 +103,7 @@ impl State<GameData> for SGame {
                 }
             },
             Err(_) => {
-                println!("");
+                println!();
                 println!("> Type a number! The secret is in range 1..=100.");
                 trans_none!()
             }

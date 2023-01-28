@@ -1,5 +1,8 @@
 use crate::trans::Trans;
 
+#[allow(clippy::module_name_repetitions)]
+pub type BoxState<D> = Box<dyn State<D>>;
+
 /// Describes an application state.
 ///
 /// See the crates docs or the book for more information.

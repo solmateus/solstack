@@ -1,4 +1,4 @@
-use crate::state::State;
+use crate::state::BoxState;
 
 /// A transition between [`State`](crate::state::State)s.
 ///
@@ -10,18 +10,18 @@ pub enum Trans<D> {
     /// Pushes a new state above the current one.
     /// Effectively pauses the current state until everything above it is
     /// popped.
-    Push(Box<dyn State<D>>),
+    Push(BoxState<D>),
 
     /// Pops the current state from the stack.
     Pop,
 
     /// Pops and pushes a new state.
     /// Effectively replaces the current state with a new one.
-    Replace(Box<dyn State<D>>),
+    Replace(BoxState<D>),
 
     /// Pops every state from the stack and pushes a new one.
     /// Effectively isolates it as the only state on the stack.
-    Isolate(Box<dyn State<D>>),
+    Isolate(BoxState<D>),
     
     /// Pops everything from the stack.
     /// Effectively ends the state stack machine.

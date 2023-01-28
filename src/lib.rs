@@ -61,9 +61,10 @@
 //!         println!("on_start `make data be 10` > GameData({})", data.value);
 //!     }
 //!  
-//!     fn on_tick(&mut self, data: &mut GameData) -> Trans {
+//!     fn on_tick(&mut self, data: &mut GameData) -> Trans<GameData> {
 //!         data.value += 1;
 //!         println!("on_tick `add one to data` > GameData({})", data.value);
+//!         Trans::None
 //!     }
 //! }
 //!
@@ -88,6 +89,7 @@
 //! *By Sol* <solmateusbraga@gmail.com>
 
 #![warn(clippy::pedantic)]
+#![allow(clippy::needless_doctest_main)]
 
 pub mod macros;
 pub mod stack;
