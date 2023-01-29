@@ -12,7 +12,7 @@ This library provides a `Stack` type that holds a stack of `State`s. When the st
 
 - Search documentation at the [crate's docs](https://crates.io/crates/solstack).
 
- 
+
 
 > *Project is in early development, things may change around! Take a look at the changelog before updating.*
 
@@ -60,10 +60,11 @@ impl State<GameData> for AddOneAndPrintState {
         data.value = 10;
         println!("on_start `make data be 10` > GameData({})", data.value);
     }
-    
-    fn on_tick(&mut self, data: &mut GameData) -> Trans {
+
+    fn on_tick(&mut self, data: &mut GameData) -> Trans<GameData> {
         data.value += 1;
         println!("on_tick `add one to data` > GameData({})", data.value);
+        Trans::None
     }
 }
 
