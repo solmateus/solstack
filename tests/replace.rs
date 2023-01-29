@@ -1,5 +1,7 @@
-use solstack::{prelude::*, stack_tick};
+use solstack::{prelude::*, stack_tick, stack_push};
 use solstack::macros::{stack_replace, trans_replace};
+
+// TODO: test multiple argument use of `stack_replace!`.
 
 // No macros
 type SData = i32;
@@ -89,7 +91,7 @@ fn replacing_macro() {
     let mut stack = Stack::new();
     let mut data = 0;
 
-    stack.push(&mut data, Box::new(SDummy1Macro));
+    stack_push!(stack, data, SDummy1Macro);
 
     assert_eq!(data, 0);
 

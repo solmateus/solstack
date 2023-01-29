@@ -1,4 +1,4 @@
-use solstack::{prelude::*, stack_tick};
+use solstack::{prelude::*, stack_tick, stack_push};
 use solstack::macros::trans_none;
 
 // No macros
@@ -36,9 +36,9 @@ impl State<()> for STestMacro {
 fn nonning_macro() {
     let mut stack = Stack::new();
 
-    stack.push(&mut (), Box::new(STestMacro));
-    stack.push(&mut (), Box::new(STestMacro));
-    stack.push(&mut (), Box::new(STestMacro));
+    stack_push!(stack, (), STestMacro);
+    stack_push!(stack, (), STestMacro);
+    stack_push!(stack, (), STestMacro);
 
     stack_tick!(stack, ());
     stack_tick!(stack, ());

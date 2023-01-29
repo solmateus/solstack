@@ -1,4 +1,4 @@
-use solstack::{prelude::*, stack_tick};
+use solstack::{prelude::*, stack_tick, stack_push};
 use solstack::macros::{trans_quit, stack_quit};
 
 // No macros
@@ -44,17 +44,17 @@ impl State<()> for STestMacro {
 fn quitting_macro() {
     let mut stack = Stack::new();
     
-    stack.push(&mut (), Box::new(STest));
-    stack.push(&mut (), Box::new(STest));
-    stack.push(&mut (), Box::new(STest));
+    stack_push!(stack, (), STest);
+    stack_push!(stack, (), STest);
+    stack_push!(stack, (), STest);
 
     assert_eq!(stack.len(), 3);
 
     stack_quit!(stack, ());    
 
-    stack.push(&mut (), Box::new(STest));
-    stack.push(&mut (), Box::new(STest));
-    stack.push(&mut (), Box::new(STest));
+    stack_push!(stack, (), STest);
+    stack_push!(stack, (), STest);
+    stack_push!(stack, (), STest);
 
     stack_tick!(stack, ());
 
