@@ -1,4 +1,4 @@
-use solstack::prelude::*;
+use solstack::{prelude::*, stack_tick};
 use solstack::macros::{stack_push, trans_push};
 
 // No macros
@@ -38,12 +38,15 @@ fn pushing_macro() {
     stack_push!(stack, (), SPushMacro);
     assert_eq!(stack.len(), 1);
 
-    stack_push!(stack, (), SPushMacro);
+    stack_tick!(stack, ());
     assert_eq!(stack.len(), 2);
 
-    stack_push!(stack, (), SPushMacro);
+    stack_tick!(stack, ());
     assert_eq!(stack.len(), 3);
 
-    stack_push!(stack, (), SPushMacro, SPushMacro, SPushMacro);    
+    stack_push!(stack, (), SPushMacro, SPushMacro, SPushMacro);
     assert_eq!(stack.len(), 6);
+
+    stack_tick!(stack, ());
+    assert_eq!(stack.len(), 7);
 }

@@ -42,8 +42,8 @@ pub use stack_pop;
 macro_rules! stack_replace {
     ($stack:expr, $data:expr, $($state:expr),+) => {
         $(
-            $stack.pop(&mut data);
-            $stack.push(Box::new($state));
+            $stack.pop(&mut $data);
+            $stack.push(&mut $data, Box::new($state));
         )+
     }
 }
@@ -59,7 +59,7 @@ pub use stack_replace;
 macro_rules! stack_isolate{
     ($stack:expr, $data:expr, $($state:expr),+) => {
         // Pops everything from the stack.
-        $stack.quit(&mut data);
+        $stack.quit(&mut $data);
         // Adds the provided states for isolation.
         $($stack.push(&mut $data, Box::new($state));)+
     }
