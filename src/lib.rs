@@ -12,6 +12,7 @@
 //!
 //! - Search documentation at the [crate's docs](https://crates.io/crates/solstack).
 //!
+//! - Watch the project develop through its [changelog](https://github.com/solmateus/solstack/blob/main/CHANGELOG.md)!
 //!
 //!
 //! > *Project is in early development, things may change around! Take a look at the changelog before updating.*
@@ -24,6 +25,8 @@
 //! - An easy to use `Stack` State Machine.
 //! - Multiple `Trans`itions between states. 
 //! - Multiple state methods, such as `on_start`, `on_pause`, `on_tick`, etc.
+//! - New in v0.3.0:
+//!     - Shadow tick method that is always run once the stack is ticked, even if the state isn't the topmost at said the stack.
 //!
 //!
 //!

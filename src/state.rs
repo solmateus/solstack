@@ -31,5 +31,14 @@ pub trait State<D> {
 
         Trans::None
     }
+
+    /// Represents a single tick/update independent of this [`State`](crate::state::State) 
+    /// position in the stack.
+    /// It's called when the [`Stack`](crate::stack::Stack)'s `.tick()` is called.
+    /// NOTE: `on_shadow_tick` is called BEFORE `on_tick`.
+    fn on_shadow_tick(&mut self, _data: &mut D) -> Trans<D> {
+
+        Trans::None
+    }
 }
 

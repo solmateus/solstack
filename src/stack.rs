@@ -103,11 +103,33 @@ impl <D> Stack<D> {
     
     /// Ticks the current (topmost at the stack) state once.
     pub fn tick(&mut self, data: &mut D) {
-        let transition = match self.stack.last_mut() {
+        // ticks all of the state's `on_shadow_update` and store the
+        // transitions.
+        let mut shadow_transitions: Vec<Trans<D>> = vec![];
+
+        for state in self.stack.iter_mut() {
+            shadow_transitions.push(state.on_shadow_tick(data));
+        };
+
+        // perform the transitions of all of the states on `on_shadow_tick`.
+        for shadow_transition in shadow_transitions {
+            match shadow_transition {
+                Trans::Push(state)    => self.push   (data, state),
+                Trans::Pop            => self.pop    (data       ),
+                Trans::Replace(state) => self.replace(data, state),
+                Trans::Isolate(state) => self.isolate(data, state),
+                Trans::None           =>             (           ),
+                Trans::Quit           => self.quit   (data       ),
+            }
+        }
+
+        // ticks the topmost state at the stack.
+        let transition: Trans<D> = match self.stack.last_mut() {
             Some(state) => state.on_tick(data),
             None => Trans::None,
         };
 
+        // perform the transition returned by the topmost stack's `on_tick`.
         match transition {
             Trans::Push(state)    => self.push   (data, state),
             Trans::Pop            => self.pop    (data       ),
