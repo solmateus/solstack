@@ -18,8 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Shadowing: methods on `State`s that are always executed on a `Stack`'s `tick`,
 even if the `State` is not at the top.
   - `on_shadow_tick` for when the stack gets ticked through its `tick` method.
-- Added a test for the new shadow feature.
-- Minor fixes in documentation.
 
 ## [v0.2.0] - 2023-01-28
 
