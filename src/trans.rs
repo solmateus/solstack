@@ -6,7 +6,6 @@ use crate::state::BoxState;
 /// ### Generics
 /// - D: Data available to all [`State`](crate::state::State)s to perform actions to.
 pub enum Trans<D> {
-
     /// Pushes a new state above the current one.
     /// Effectively pauses the current state until everything above it is
     /// popped.
@@ -22,7 +21,7 @@ pub enum Trans<D> {
     /// Pops every state from the stack and pushes a new one.
     /// Effectively isolates it as the only state on the stack.
     Isolate(BoxState<D>),
-    
+
     /// Pops everything from the stack.
     /// Effectively ends the state stack machine.
     Quit,
@@ -31,4 +30,3 @@ pub enum Trans<D> {
     /// Effectively keeps the current state and the stack the way it is.
     None,
 }
-

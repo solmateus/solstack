@@ -17,7 +17,12 @@ rust-version = "1.56.1" # `cargo msrv` output
 [dependencies]
 
 [dev-dependencies]
+criterion = "0.4.0"
 rand = "0.8.5"
+
+[[bench]]
+name = "ticking"
+harness = false
 
 [[example]]
 name = "guessing_game"
