@@ -1,5 +1,5 @@
-use solstack::{prelude::*, stack_push};
 use solstack::macros::{stack_pop, trans_pop};
+use solstack::{prelude::*, stack_push};
 
 // No macros
 struct SPop;
@@ -34,12 +34,16 @@ impl State<()> for SPopMacro {
 fn popping_macro() {
     let mut stack = Stack::new();
 
-    stack_push!(stack, (), SPopMacro);
-    stack_push!(stack, (), SPopMacro);
-    stack_push!(stack, (), SPopMacro);
-    stack_push!(stack, (), SPopMacro);
-    stack_push!(stack, (), SPopMacro);
-    stack_push!(stack, (), SPopMacro);
+    stack_push!(
+        stack,
+        (),
+        SPopMacro,
+        SPopMacro,
+        SPopMacro,
+        SPopMacro,
+        SPopMacro,
+        SPopMacro
+    );
 
     assert_eq!(stack.len(), 6);
 

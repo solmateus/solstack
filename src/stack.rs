@@ -29,12 +29,13 @@ impl<D> Stack<D> {
         !self.stack.is_empty()
     }
 
-    /// Get the length of the stack.
+    /// Gets the length of the stack.
     #[must_use]
     pub fn len(&self) -> usize {
         self.stack.len()
     }
 
+    /// Checks if the stack is empty.
     #[must_use]
     pub fn is_empty(&self) -> bool {
         self.stack.is_empty()
@@ -117,26 +118,27 @@ impl<D> Stack<D> {
 
     /// Ticks the current (topmost at the stack) state once.
     pub fn tick(&mut self, data: &mut D) {
-        // ticks all of the state's `on_shadow_update` and store the
-        // transitions.
-        let mut shadow_transitions: Vec<Trans<D>> = vec![];
+        // Initializing an empty vector of transitions.
+        let mut transitions: Vec<Trans<D>> = vec![];
 
+        // Looping through every state.
+        // Performing `on_shadow_tick` on every state.
+        // Storing the transitions returned on the `transitions` vector.
         for state in &mut self.stack {
-            shadow_transitions.push(state.on_shadow_tick(data));
+            transitions.push(state.on_shadow_tick(data));
         }
 
-        // perform the transitions of all of the states on `on_shadow_tick`.
-        for shadow_transition in shadow_transitions {
-            self.transition(data, shadow_transition);
+        // Getting the topmost state at the sack.
+        // Ticking that state.
+        // Storing the transition returned on the `transitions` vector.
+        if let Some(state) = self.stack.last_mut() {
+            transitions.push(state.on_tick(data));
         }
 
-        // ticks the topmost state at the stack.
-        let transition: Trans<D> = match self.stack.last_mut() {
-            Some(state) => state.on_tick(data),
-            None => Trans::None,
-        };
-
-        // perform the transition returned by the topmost stack's `on_tick`.
-        self.transition(data, transition);
+        // Performing the transitions stored in the `transitions` vector.
+        for transition in transitions {
+            self.transition(data, transition);
+        }
     }
 }
+

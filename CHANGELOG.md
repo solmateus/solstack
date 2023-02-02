@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.3.1] - 2013-02-01
+
 ### Added
 
-- Examples updated.
+- **Performance increase** on `tick`ing of roughly **20%**.
 
 ## [v0.3.0] - 2023-01-30
 
