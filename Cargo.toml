@@ -1,6 +1,6 @@
 [package]
 name = "solstack"
-version = "0.3.1"
+version = "0.3.2"
 description = "Enables management of your app's or game's control flow through a simple state stack machine."
 authors = ["solmateus <solmateusbraga@gmail.com>"]
 edition = "2021"

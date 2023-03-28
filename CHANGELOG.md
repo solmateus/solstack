@@ -5,13 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+*Performance notes are approximated results from criterion benchmarking.*
 
-## [v0.3.1] - 2013-02-01
 
-### Added
+## [v.0.3.2] - 2023-03-28
 
-- **Performance increase** on `tick`ing of roughly **20%**.
+### Improved
+
+- **Performance increase** on previous version of roughly **30%**.
+  - Refactor of `Stack::tick`; now uses iterators instead of for loops.
+
+## [v0.3.1] - 2023-02-01
+
+### Improved
+
+- **Performance increase** on previous version of roughly **20%**.
+  - Refactor of `Stack::tick`; now uses only one vector instead of two.
 
 ## [v0.3.0] - 2023-01-30
 

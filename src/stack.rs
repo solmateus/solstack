@@ -124,9 +124,9 @@ impl<D> Stack<D> {
         // Looping through every state.
         // Performing `on_shadow_tick` on every state.
         // Storing the transitions returned on the `transitions` vector.
-        for state in &mut self.stack {
-            transitions.push(state.on_shadow_tick(data));
-        }
+        self.stack.iter_mut().for_each(|state| {
+            transitions.push(state.on_shadow_tick(data))
+        });
 
         // Getting the topmost state at the sack.
         // Ticking that state.
@@ -136,9 +136,9 @@ impl<D> Stack<D> {
         }
 
         // Performing the transitions stored in the `transitions` vector.
-        for transition in transitions {
-            self.transition(data, transition);
-        }
+        transitions.into_iter().for_each(|trans| {
+            self.transition(data, trans);
+        });
     }
 }
 
